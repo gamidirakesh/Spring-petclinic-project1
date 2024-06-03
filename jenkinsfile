@@ -1,0 +1,25 @@
+pipeline {
+    agent any
+    environment {
+        JAVA_HOME = '/usr/lib/jvm/java-17-amazon-corretto.x86_64/'
+        PATH = "$JAVA_HOME/bin:$PATH"
+    }
+    stages {
+        stage('SCM Checkout') {
+            steps {
+                git '
+https://github.com/sriison/spring-petclinic.git'
+            }
+        }
+        stage('Build') {
+            steps {
+                sh 'mvn clean install -DskipTests=true'
+            }
+        }
+        stage('Image Build') {
+            steps {
+                sh 'sudo docker build -t srini-test .'
+            }
+        }
+    }
+}
