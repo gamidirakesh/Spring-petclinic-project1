@@ -3,8 +3,7 @@ pipeline {
     stages {
         stage('SCM Checkout') {
             steps {
-                git '
-https://github.com/sriison/spring-petclinic.git'
+                git 'https://github.com/sriison/spring-petclinic.git'
             }
         }
         stage('Build') {
@@ -14,7 +13,7 @@ https://github.com/sriison/spring-petclinic.git'
         }
         stage('Image Build') {
             steps {
-                sh 'sudo docker build -t srini-test .'
+                sh 'sudo docker build -t Rakesh-test .'
             }
         }
     }
