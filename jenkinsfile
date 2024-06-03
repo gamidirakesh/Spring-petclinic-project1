@@ -7,8 +7,7 @@ pipeline {
     stages {
         stage('SCM Checkout') {
             steps {
-                git '
-https://github.com/sriison/spring-petclinic.git'
+                git 'https://github.com/gamidirakesh/Spring-petclinic-project1.git'
             }
         }
         stage('Build') {
