@@ -3,17 +3,23 @@ pipeline {
     stages {
         stage('SCM Checkout') {
             steps {
-                git 'https://github.com/sriison/spring-petclinic.git'
+                git 'https://github.com/gamidirakesh/Spring-petclinic-project1.git'
             }
         }
-        stage('Build') {
+        stage('Set Environment') {
             steps {
-                sh 'mvn clean install -DskipTests=true -Dcobertura.skip=true'
+                script {
+                    // Set JAVA_HOME environment variable
+                    withEnv(['JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64']) {
+                        // Run Maven build
+                        sh 'mvn clean install -DskipTests=true'
+                    }
+                }
             }
         }
         stage('Image Build') {
             steps {
-                sh 'sudo docker build -t Rakesh-test .'
+                sh 'sudo docker build -t srini-test .'
             }
         }
     }
