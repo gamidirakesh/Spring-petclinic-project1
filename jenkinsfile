@@ -6,14 +6,12 @@ pipeline {
                 git 'https://github.com/gamidirakesh/Spring-petclinic-project1.git'
             }
         }
-        stage('Set Environment') {
+        stage('Build') {
             steps {
                 script {
-                    // Set JAVA_HOME environment variable
-                    withEnv(['JAVA_HOME=/usr/lib/jvm/java-17-amazon-corretto.x86_64']) {
-                        // Run Maven build
-                        sh 'mvn clean install -DskipTests=true'
-                    }
+                    def mvnHome = tool 'Maven'
+                    def mvnCmd = "${mvnHome}/bin/mvn"
+                    sh "${mvnCmd} clean install -DskipTests=true -Dmaven.compiler.fork=true -Dmaven.compiler.executable=/usr/lib/jvm/java-17-amazon-corretto.x86_64/bin/javac -Dmaven.compiler.compilerapi.javax.tools.JavaCompiler=/usr/lib/jvm/java-17-amazon-corretto.x86_64/lib/tools.jar"
                 }
             }
         }
