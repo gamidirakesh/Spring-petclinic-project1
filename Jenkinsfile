@@ -3,7 +3,7 @@ pipeline {
     stages{
         stage(scm){
             steps{
-                git 'https://github.com/sriison/spring-petclinic.git'
+                git 'https://github.com/gamidirakesh/Spring-petclinic-project1.git'
             }
         }
         
